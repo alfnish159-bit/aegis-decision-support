@@ -1,5 +1,7 @@
 # Aegis REST API
 
+Публичный репозиторий: https://github.com/alfnish159-bit/aegis-decision-support
+
 Учебная система учета происшествий и назначения ресурсов. TypeScript, NestJS 10, PostgreSQL 16/PostGIS 3.4, node-postgres. src/ расширяет shared/ – проверенные классы ЛР8. Это автономный снимок единой реализации из ЛР8/src и ЛР9/src. Миграция database/01-schema.sql сохраняет модель ЛР7.
 
 ## Запуск
@@ -7,6 +9,8 @@
 Требуются Node.js 22 или новее, npm и Docker Compose. Скопируйте .env.example в .env. Задайте собственный POSTGRES_PASSWORD и DATABASE_URL вида postgresql://aegis:YOUR_PASSWORD@127.0.0.1:5549/aegis_labs. Файл .env исключен из Git.
 
 ```bash
+git clone https://github.com/alfnish159-bit/aegis-decision-support.git
+cd aegis-decision-support
 npm ci
 docker compose up -d --wait db
 docker compose exec -T db psql -U aegis -d aegis_labs -v ON_ERROR_STOP=1 < database/01-schema.sql
