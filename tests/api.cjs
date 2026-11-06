@@ -1,0 +1,43 @@
+const assert=require('node:assert/strict'),fs=require('node:fs');
+fs.mkdirSync('screenshots',{recursive:true});
+const {createApp}=require('../dist/src/main');const {Database}=require('../dist/shared/database');
+(async()=>{const app=await createApp();await app.listen(0,'127.0.0.1');const base=await app.getUrl();const db=app.get(Database);const actor='00000000-0000-4000-8000-000000000001',admin='00000000-0000-4000-8000-000000000002';const trace=[],checks=[],stamp=Date.now();
+async function request(method,path,body,user){const headers={Accept:'application/json'};if(body!==undefined)headers['Content-Type']='application/json';if(user)headers['X-User-Id']=user;const r=await fetch(base+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body)});const text=await r.text();const value=text?JSON.parse(text):null;const row={method,path,request:body??null,actor:user??null,status:r.status,headers:{contentType:r.headers.get('content-type'),location:r.headers.get('location')},response:value};trace.push(row);return row;}
+async function check(name,run){await run();checks.push(name);console.log('PASS',name);}
+const data={name:'Учебный ресурс '+stamp,kind:'RESCUE',capacity:5,locationName:'Учебная база',maintenance:false};let id,incidentId,linked;
+try{
+await check('GET /health: 200 JSON',async()=>assert.equal((await request('GET','/health')).response.status,'ok'));
+await check('GET /resources: 200 array',async()=>{const r=await request('GET','/resources');assert.equal(r.status,200);assert(Array.isArray(r.response));});
+await check('GET /incidents: 200 array',async()=>assert(Array.isArray((await request('GET','/incidents')).response)));
+await check('POST resource: 201 + Location + DTO',async()=>{const r=await request('POST','/resources',data,admin);assert.equal(r.status,201);id=r.response.id;assert.equal(r.headers.location,'/resources/'+id);assert.deepEqual(r.response,{id,...data});});
+await check('GET resource by UUID: 200',async()=>assert.deepEqual((await request('GET','/resources/'+id)).response,{id,...data}));
+await check('PUT resource: 200 full replacement',async()=>{const r=await request('PUT','/resources/'+id,{...data,capacity:7},admin);assert.equal(r.status,200);assert.equal(r.response.capacity,7);});
+await check('PUT idempotent result',async()=>assert.equal((await request('PUT','/resources/'+id,{...data,capacity:7},admin)).response.capacity,7));
+await check('POST duplicate name: 409',async()=>assert.equal((await request('POST','/resources',data,admin)).status,409));
+await check('POST missing actor: 401',async()=>assert.equal((await request('POST','/resources',data)).status,401));
+await check('POST dispatcher cannot manage resources: 403',async()=>assert.equal((await request('POST','/resources',data,actor)).status,403));
+await check('POST unknown actor: 403',async()=>assert.equal((await request('POST','/resources',data,'00000000-0000-4000-8000-999999999999')).status,403));
+for(const [name,body] of [['capacity=0',{...data,capacity:0}],['fractional capacity',{...data,capacity:2.5}],['unknown kind',{...data,kind:'X'}],['boolean as string',{...data,maintenance:'false'}],['empty name',{...data,name:' '}],['unknown field',{...data,extra:true}],['JSON array',[]],['null body',null]])await check('Invalid '+name+': 400',async()=>assert.equal((await request('POST','/resources',body,admin)).status,400));
+await check('Malformed UUID: 400',async()=>assert.equal((await request('GET','/resources/wrong')).status,400));
+const absent='40000000-0000-4000-8000-999999999999';
+for(const method of ['GET','PUT','DELETE'])await check(method+' missing resource: 404',async()=>assert.equal((await request(method,'/resources/'+absent,method==='PUT'?data:undefined,admin)).status,404));
+await check('DELETE resource: 204 empty body',async()=>{const r=await request('DELETE','/resources/'+id,undefined,admin);assert.equal(r.status,204);assert.equal(r.response,null);});
+await check('GET deleted resource: 404',async()=>assert.equal((await request('GET','/resources/'+id)).status,404));
+await check('Repeated DELETE: 404',async()=>assert.equal((await request('DELETE','/resources/'+id,undefined,admin)).status,404));
+const input={typeCode:'FIRE',severityCode:'HIGH',title:'HTTP проверка '+stamp,description:'Учебное сообщение для проверки API и транзакций.',address:'Минск, учебная площадка',lat:53.91,lng:27.56,occurredAt:new Date(Date.now()-60000).toISOString(),reporterName:'Учебный заявитель',phone:'+375000000099'};
+await check('POST incident: 201 + NEW',async()=>{const r=await request('POST','/incidents',input,actor);assert.equal(r.status,201);incidentId=r.response.id;assert.equal(r.response.status_code,'NEW');});
+await check('GET incident: 200 history CREATED',async()=>{const r=await request('GET','/incidents/'+incidentId);assert.equal(r.status,200);assert.equal(r.response.history[0].event_type,'CREATED');});
+await check('Invalid status jump: 409',async()=>assert.equal((await request('PATCH',`/incidents/${incidentId}/status`,{status:'RESPONDING'},actor)).status,409));
+await check('POST invalid coordinates: 400',async()=>assert.equal((await request('POST','/incidents',{...input,lat:91},actor)).status,400));
+await check('POST invalid dictionary: 409 + rollback',async()=>{const before=(await db.query('SELECT count(*)::int n FROM reporter')).rows[0].n;assert.equal((await request('POST','/incidents',{...input,typeCode:'UNKNOWN'},actor)).status,409);assert.equal((await db.query('SELECT count(*)::int n FROM reporter')).rows[0].n,before);});
+await check('PATCH VERIFICATION then CONFIRMED: 200',async()=>{for(const status of ['VERIFICATION','CONFIRMED'])assert.equal((await request('PATCH',`/incidents/${incidentId}/status`,{status},actor)).status,200);});
+await check('RESPONDING requires assignment: 409',async()=>assert.equal((await request('PATCH',`/incidents/${incidentId}/status`,{status:'RESPONDING'},actor)).status,409));
+linked=(await request('POST','/resources',{...data,name:'Назначаемый ресурс '+stamp},admin)).response.id;
+await check('POST assignment: 201',async()=>assert.equal((await request('POST',`/incidents/${incidentId}/assignments`,{resourceIds:[linked]},actor)).status,201));
+await check('PUT busy resource: 409',async()=>assert.equal((await request('PUT','/resources/'+linked,{...data,name:'Назначаемый ресурс '+stamp},admin)).status,409));
+await check('DELETE referenced resource: 409',async()=>assert.equal((await request('DELETE','/resources/'+linked,undefined,admin)).status,409));
+await check('Concurrent assignment same resource: one 201, one 409',async()=>{const j=(await request('POST','/incidents',input,actor)).response.id;for(const status of ['VERIFICATION','CONFIRMED'])await request('PATCH',`/incidents/${j}/status`,{status},actor);const fresh=(await request('POST','/resources',{...data,name:'Конкурентный ресурс '+stamp},admin)).response.id;const results=await Promise.all([request('POST',`/incidents/${j}/assignments`,{resourceIds:[fresh]},actor),request('POST',`/incidents/${incidentId}/assignments`,{resourceIds:[fresh]},actor)]);assert.deepEqual(results.map(r=>r.status).sort(),[201,409]);for(const target of [j,incidentId]){for(const status of ['RESPONDING','LOCALIZED','RESOLVED']){const r=await request('PATCH',`/incidents/${target}/status`,{status},actor);if(r.status===409){assert.equal(r.response.error,'RESOURCE_REQUIRED');break;}}}});
+await check('Completed incident releases resources + audit',async()=>{let r=await request('GET','/incidents/'+incidentId);if(r.response.status_code!=='RESOLVED'){for(const status of ['RESPONDING','LOCALIZED','RESOLVED'])assert.equal((await request('PATCH',`/incidents/${incidentId}/status`,{status},actor)).status,200);r=await request('GET','/incidents/'+incidentId);}assert.equal(r.response.assignments.filter(a=>!a.released_at).length,0);assert(r.response.history.some(e=>e.event_type==='RESOURCE_RELEASED'));});
+await check('DELETE historical resource still forbidden: 409',async()=>assert.equal((await request('DELETE','/resources/'+linked,undefined,admin)).status,409));
+fs.writeFileSync('screenshots/http-results.json',JSON.stringify({checkedAt:new Date().toISOString(),passed:checks.length,cases:checks,trace},null,2));console.log('TOTAL',checks.length,'PASSED');
+}catch(e){fs.writeFileSync('screenshots/http-failure.json',JSON.stringify({checks,trace,error:e.message},null,2));throw e;}finally{await app.close();}})().catch(e=>{console.error(e);process.exitCode=1});

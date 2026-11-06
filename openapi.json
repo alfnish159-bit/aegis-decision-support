@@ -1,0 +1,1409 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Aegis Decision Support API",
+    "version": "1.0.0",
+    "description": "Учебная идентификация X-User-Id; полноценная аутентификация отсутствует. Базовая модель и сценарии ЛР7–8."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3029"
+    }
+  ],
+  "paths": {
+    "/incidents": {
+      "get": {
+        "summary": "Получить реестр происшествий",
+        "operationId": "UC1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Получить реестр происшествий",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "d07bd806-a8cf-4d01-a820-2f40f058b85e",
+                    "number": "171",
+                    "title": "Учебная проверка бизнес-логики",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Подтвержден",
+                    "registered_at": "2026-11-06T11:27:30.204Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "81ab0cd7-a57e-4141-aa01-99da538eca2c",
+                    "number": "169",
+                    "title": "Учебная проверка бизнес-логики",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Завершен",
+                    "registered_at": "2026-11-06T11:27:29.953Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "c3f6a21a-026a-45e4-9877-48b6761650ab",
+                    "number": "168",
+                    "title": "поджег",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Завершен",
+                    "registered_at": "2026-10-21T16:36:37.037Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "711509a9-787b-44fc-93d4-0ecf54c7da71",
+                    "number": "167",
+                    "title": "Учебное задымление на объекте 123321",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Новый",
+                    "registered_at": "2026-10-21T16:31:29.840Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "6828aebc-7a7a-4023-af8d-1ca61040c88e",
+                    "number": "166",
+                    "title": "Учебное задымление на объекте",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Новый",
+                    "registered_at": "2026-10-21T16:31:20.698Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "61f48fbd-f4c8-4fc8-ad8f-293f8c184f19",
+                    "number": "165",
+                    "title": "Проверка запуска и инструкции",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Завершен",
+                    "registered_at": "2026-10-21T10:49:32.340Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "9092435d-ebdc-4e57-a7fb-1cbe4774fa6a",
+                    "number": "164",
+                    "title": "Проверка запуска и инструкции",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Новый",
+                    "registered_at": "2026-10-21T10:48:48.263Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "75051346-700d-4df3-9530-1dacd440fb15",
+                    "number": "163",
+                    "title": "Учебная проверка реагирования",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Завершен",
+                    "registered_at": "2026-10-21T10:42:21.623Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "2aa249d0-5dc2-43c5-bca4-f52dad1c40c9",
+                    "number": "162",
+                    "title": "Учебная проверка бизнес-логики",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Подтвержден",
+                    "registered_at": "2026-10-21T10:42:21.102Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "5ad228b4-23d0-4cc8-8664-0026070ec209",
+                    "number": "160",
+                    "title": "Учебная проверка бизнес-логики",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Завершен",
+                    "registered_at": "2026-10-21T10:42:21.056Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "d9ea31ec-c047-443c-a2a7-ea5454fb07ad",
+                    "number": "159",
+                    "title": "Учебная проверка бизнес-логики",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Подтвержден",
+                    "registered_at": "2026-10-21T10:24:39.060Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "ac641344-8d66-478a-a946-e27d7024dc7b",
+                    "number": "157",
+                    "title": "Учебная проверка бизнес-логики",
+                    "address": "Минск, учебный объект",
+                    "type": "Пожар",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Завершен",
+                    "registered_at": "2026-10-21T10:24:39.013Z",
+                    "lat": 53.91,
+                    "lng": 27.56,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "30000000-0000-4000-8000-000000000003",
+                    "number": "156",
+                    "title": "Запах газа в подъезде",
+                    "address": "ул. Козлова, 15",
+                    "type": "Утечка газа",
+                    "severity": "Критический",
+                    "priority": 1,
+                    "status": "Новый",
+                    "registered_at": "2026-10-21T10:24:18.286Z",
+                    "lat": 53.909,
+                    "lng": 27.589,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "30000000-0000-4000-8000-000000000002",
+                    "number": "155",
+                    "title": "Столкновение автомобилей",
+                    "address": "просп. Независимости, 72",
+                    "type": "ДТП",
+                    "severity": "Высокий",
+                    "priority": 2,
+                    "status": "Новый",
+                    "registered_at": "2026-10-21T10:24:18.286Z",
+                    "lat": 53.922,
+                    "lng": 27.611,
+                    "active_resources": "0"
+                  },
+                  {
+                    "id": "30000000-0000-4000-8000-000000000001",
+                    "number": "154",
+                    "title": "Пожар в жилом здании",
+                    "address": "ул. Якуба Коласа, 28",
+                    "type": "Пожар",
+                    "severity": "Критический",
+                    "priority": 1,
+                    "status": "Новый",
+                    "registered_at": "2026-10-21T10:24:18.279Z",
+                    "lat": 53.926,
+                    "lng": 27.599,
+                    "active_resources": "0"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Зарегистрировать происшествие",
+        "operationId": "UC3",
+        "parameters": [
+          {
+            "name": "X-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Учебная идентификация; ADMIN для каталога, ADMIN или DISPATCHER для происшествий"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Зарегистрировать происшествие",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Incident"
+                },
+                "example": {
+                  "id": "ab54d32a-1108-45cb-995b-114850ff5ce8",
+                  "number": "172",
+                  "status_code": "NEW",
+                  "title": "HTTP проверка 1793965095760"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Нет активного пользователя с требуемой ролью",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Проверьте UUID автора, время и координаты",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Нарушение ограничений БД",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncidentInput"
+              },
+              "example": {
+                "typeCode": "FIRE",
+                "severityCode": "HIGH",
+                "title": "HTTP проверка 1793965095760",
+                "description": "Учебное сообщение для проверки API и транзакций.",
+                "address": "Минск, учебная площадка",
+                "lat": 53.91,
+                "lng": 27.56,
+                "occurredAt": "2026-11-06T11:37:15.972Z",
+                "reporterName": "Учебный заявитель",
+                "phone": "+375000000099"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}": {
+      "get": {
+        "summary": "Получить происшествие и историю",
+        "operationId": "UC2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Получить происшествие и историю",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "id": "ab54d32a-1108-45cb-995b-114850ff5ce8",
+                  "number": "172",
+                  "type_code": "FIRE",
+                  "severity_code": "HIGH",
+                  "status_code": "NEW",
+                  "reporter_id": "2ee97cc3-2f7e-433c-a839-a81cfaa537a1",
+                  "created_by": "00000000-0000-4000-8000-000000000001",
+                  "title": "HTTP проверка 1793965095760",
+                  "description": "Учебное сообщение для проверки API и транзакций.",
+                  "address": "Минск, учебная площадка",
+                  "location": "0101000020E61000008FC2F5285C8F3B4014AE47E17AF44A40",
+                  "occurred_at": "2026-11-06T11:37:15.972Z",
+                  "registered_at": "2026-11-06T11:38:15.982Z",
+                  "resolved_at": null,
+                  "lat": 53.91,
+                  "lng": 27.56,
+                  "history": [
+                    {
+                      "id": "64",
+                      "incident_id": "ab54d32a-1108-45cb-995b-114850ff5ce8",
+                      "actor_id": "00000000-0000-4000-8000-000000000001",
+                      "event_type": "CREATED",
+                      "from_status": null,
+                      "to_status": "NEW",
+                      "details": "Сообщение зарегистрировано",
+                      "occurred_at": "2026-11-06T11:38:15.991Z"
+                    }
+                  ],
+                  "assignments": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректный UUID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Объект не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/status": {
+      "patch": {
+        "summary": "Изменить статус происшествия",
+        "operationId": "UC4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Учебная идентификация; ADMIN для каталога, ADMIN или DISPATCHER для происшествий"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Изменить статус происшествия",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Incident"
+                },
+                "example": {
+                  "id": "ab54d32a-1108-45cb-995b-114850ff5ce8",
+                  "number": "172",
+                  "status_code": "VERIFICATION",
+                  "title": "HTTP проверка 1793965095760"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Нет активного пользователя с требуемой ролью",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неизвестный статус",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Переход запрещен или нет ресурса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Объект не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusInput"
+              },
+              "example": {
+                "status": "VERIFICATION"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/incidents/{id}/assignments": {
+      "post": {
+        "summary": "Назначить ресурсы",
+        "operationId": "UC5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Учебная идентификация; ADMIN для каталога, ADMIN или DISPATCHER для происшествий"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Назначить ресурсы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "incidentId",
+                    "assignmentIds"
+                  ],
+                  "properties": {
+                    "incidentId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "assignmentIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "incidentId": "ab54d32a-1108-45cb-995b-114850ff5ce8",
+                  "assignmentIds": [
+                    "bd692293-c4cd-4e13-ba15-e8da80b3c958"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Нет активного пользователя с требуемой ролью",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Размер массива либо повтор UUID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Недопустимый статус или ресурс недоступен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Один из ресурсов не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignmentInput"
+              },
+              "example": {
+                "resourceIds": [
+                  "0598bdf6-b240-414a-9a14-d055e69eeef5"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources": {
+      "get": {
+        "summary": "Получить реестр ресурсов",
+        "operationId": "UC6",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Получить реестр ресурсов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "20000000-0000-4000-8000-000000000005",
+                    "name": "Автомобиль СА-11",
+                    "kind": "VEHICLE",
+                    "capacity": 4,
+                    "location_name": "Техническая база",
+                    "maintenance": true,
+                    "incident_id": null
+                  },
+                  {
+                    "id": "20000000-0000-4000-8000-000000000002",
+                    "name": "Бригада СМП № 04",
+                    "kind": "MEDICAL",
+                    "capacity": 3,
+                    "location_name": "Первомайский район",
+                    "maintenance": false,
+                    "incident_id": null
+                  },
+                  {
+                    "id": "20000000-0000-4000-8000-000000000004",
+                    "name": "Патруль № 21",
+                    "kind": "POLICE",
+                    "capacity": 2,
+                    "location_name": "Советский район",
+                    "maintenance": false,
+                    "incident_id": null
+                  },
+                  {
+                    "id": "20000000-0000-4000-8000-000000000001",
+                    "name": "Пожарный расчет № 12",
+                    "kind": "FIRE",
+                    "capacity": 6,
+                    "location_name": "Советский район",
+                    "maintenance": false,
+                    "incident_id": null
+                  },
+                  {
+                    "id": "20000000-0000-4000-8000-000000000003",
+                    "name": "Спасательная группа № 07",
+                    "kind": "RESCUE",
+                    "capacity": 5,
+                    "location_name": "Центральный район",
+                    "maintenance": false,
+                    "incident_id": null
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Добавить ресурс",
+        "operationId": "UC8",
+        "parameters": [
+          {
+            "name": "X-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Учебная идентификация; ADMIN для каталога, ADMIN или DISPATCHER для происшествий"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Добавить ресурс",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                },
+                "example": {
+                  "id": "7bb76b52-a9ff-40fe-ac69-dd9dcc21728b",
+                  "name": "Учебный ресурс 1793965095760",
+                  "kind": "RESCUE",
+                  "capacity": 5,
+                  "locationName": "Учебная база",
+                  "maintenance": false
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "URI созданного ресурса",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Отсутствует X-User-Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Нет активного пользователя с требуемой ролью",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неизвестное поле DTO",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Нарушение ограничений БД",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceInput"
+              },
+              "example": {
+                "name": "Учебный ресурс 1793965095760",
+                "kind": "RESCUE",
+                "capacity": 5,
+                "locationName": "Учебная база",
+                "maintenance": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/{id}": {
+      "get": {
+        "summary": "Получить ресурс",
+        "operationId": "UC7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Получить ресурс",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                },
+                "example": {
+                  "id": "7bb76b52-a9ff-40fe-ac69-dd9dcc21728b",
+                  "name": "Учебный ресурс 1793965095760",
+                  "kind": "RESCUE",
+                  "capacity": 5,
+                  "locationName": "Учебная база",
+                  "maintenance": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректный UUID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Объект не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Заменить сведения ресурса",
+        "operationId": "UC9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Учебная идентификация; ADMIN для каталога, ADMIN или DISPATCHER для происшествий"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Заменить сведения ресурса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                },
+                "example": {
+                  "id": "7bb76b52-a9ff-40fe-ac69-dd9dcc21728b",
+                  "name": "Учебный ресурс 1793965095760",
+                  "kind": "RESCUE",
+                  "capacity": 7,
+                  "locationName": "Учебная база",
+                  "maintenance": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Отсутствует X-User-Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Нет активного пользователя с требуемой ролью",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неизвестное поле DTO",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Есть активное назначение",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Объект не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceInput"
+              },
+              "example": {
+                "name": "Учебный ресурс 1793965095760",
+                "kind": "RESCUE",
+                "capacity": 7,
+                "locationName": "Учебная база",
+                "maintenance": false
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Удалить ресурс без истории",
+        "operationId": "UC10",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "X-User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Учебная идентификация; ADMIN для каталога, ADMIN или DISPATCHER для происшествий"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Удалить ресурс без истории"
+          },
+          "401": {
+            "description": "Отсутствует X-User-Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Нет активного пользователя с требуемой ролью",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректный UUID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Объект не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Непредвиденная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Есть история назначений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Проверка доступности процесса",
+        "responses": {
+          "200": {
+            "description": "Процесс запущен; не проверяет БД",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "ok",
+                  "mode": "educational"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResourceInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "kind",
+          "capacity",
+          "locationName",
+          "maintenance"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Наименование 1…120 символов",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "kind": {
+            "type": "string",
+            "description": "FIRE, MEDICAL, RESCUE, POLICE, GAS, POWER или VEHICLE",
+            "enum": [
+              "FIRE",
+              "MEDICAL",
+              "RESCUE",
+              "POLICE",
+              "GAS",
+              "POWER",
+              "VEHICLE"
+            ]
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Вместимость 1…100",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "locationName": {
+            "type": "string",
+            "description": "Место базирования 1…120 символов",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "maintenance": {
+            "type": "boolean",
+            "description": "На обслуживании"
+          }
+        }
+      },
+      "Resource": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "capacity",
+          "locationName",
+          "maintenance"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID ресурса"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование 1…120 символов",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "kind": {
+            "type": "string",
+            "description": "FIRE, MEDICAL, RESCUE, POLICE, GAS, POWER или VEHICLE",
+            "enum": [
+              "FIRE",
+              "MEDICAL",
+              "RESCUE",
+              "POLICE",
+              "GAS",
+              "POWER",
+              "VEHICLE"
+            ]
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Вместимость 1…100",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "locationName": {
+            "type": "string",
+            "description": "Место базирования 1…120 символов",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "maintenance": {
+            "type": "boolean",
+            "description": "На обслуживании"
+          }
+        }
+      },
+      "IncidentInput": {
+        "type": "object",
+        "required": [
+          "typeCode",
+          "severityCode",
+          "title",
+          "description",
+          "address",
+          "lat",
+          "lng",
+          "occurredAt",
+          "reporterName",
+          "phone"
+        ],
+        "properties": {
+          "typeCode": {
+            "type": "string",
+            "description": "Код incident_type, например FIRE"
+          },
+          "severityCode": {
+            "type": "string",
+            "description": "Код severity, например HIGH"
+          },
+          "title": {
+            "type": "string",
+            "description": "Заголовок 1…120"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание 10…4000"
+          },
+          "address": {
+            "type": "string",
+            "description": "Адрес 1…200"
+          },
+          "lat": {
+            "type": "number",
+            "description": "Широта от минус 90 до 90"
+          },
+          "lng": {
+            "type": "number",
+            "description": "Долгота от минус 180 до 180"
+          },
+          "occurredAt": {
+            "type": "string",
+            "description": "ISO-дата с часовым поясом, не в будущем"
+          },
+          "reporterName": {
+            "type": "string",
+            "description": "Имя заявителя 1…120"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Телефон 7…30, цифры, пробелы, +, скобки, дефис"
+          }
+        }
+      },
+      "Incident": {
+        "type": "object",
+        "required": [
+          "id",
+          "number",
+          "status_code",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID происшествия"
+          },
+          "number": {
+            "type": "string",
+            "description": "Номер bigint сериализуется строкой"
+          },
+          "status_code": {
+            "type": "string",
+            "description": "Состояние жизненного цикла"
+          },
+          "title": {
+            "type": "string",
+            "description": "Заголовок происшествия"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error",
+          "message"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Машинный код"
+          },
+          "message": {
+            "type": "string",
+            "description": "Описание ошибки"
+          }
+        }
+      },
+      "StatusInput": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "NEW",
+              "VERIFICATION",
+              "CONFIRMED",
+              "RESPONDING",
+              "LOCALIZED",
+              "RESOLVED"
+            ]
+          }
+        }
+      },
+      "AssignmentInput": {
+        "type": "object",
+        "required": [
+          "resourceIds"
+        ],
+        "properties": {
+          "resourceIds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      }
+    }
+  }
+}
